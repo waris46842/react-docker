@@ -9,8 +9,7 @@ export default class PageOne extends Component {
         this.state = {
             key: "",
             value: [],
-            showButton: true,
-            listItems: ""
+            showButton: true
         };
     }
     getKeyData() {
@@ -40,10 +39,7 @@ export default class PageOne extends Component {
                 this.setState({
                     value: data.value,
                     showButton: !this.state.showButton,
-                    listItems: data.value.map((val) => <li>{val}</li>)
                 })
-
-                console.log(this.state.value)
 
             })
             .catch((error) => {
@@ -55,7 +51,7 @@ export default class PageOne extends Component {
         return (
             <div>
                 {this.state.showButton ? <button onClick={this.getKeyData}>Load</button> :  <Link to={{pathname: "/pageTwo", state: {key: this.state.key, value: this.state.value}}}><button>Calculate</button></Link>}
-                <ul>{this.state.listItems}</ul>
+                <ul>{this.state.value.map((val) => <li>{val}</li>)}</ul>
             </div>
         )
     }
